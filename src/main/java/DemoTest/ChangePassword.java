@@ -120,6 +120,33 @@ public class ChangePassword extends BeforeAfterTest {
         tv2.click();
         System.out.println("Подтверждаем код");
 
+        AndroidElement profile2 = newAndroidWebEl("kz.rahmet.app:id/ivIconProfile", this.DefaultTimeout);
+        profile2.click();
+
+        AndroidElement settings = newAndroidWebEl("kz.rahmet.app:id/ivBtnSettings", this.DefaultTimeout);
+        settings.click();
+
+        change.click();
+        System.out.println("Меняем пароль на старый");
+
+        current.click();
+        current.sendKeys("KTasybekova1");
+        System.out.println("Вводим текущий пароль");
+
+        newPassword.click();
+        newPassword.sendKeys("KTasybekova2");
+        System.out.println("Вводим новый пароль");
+
+        repeat.click();
+        repeat.sendKeys("KTasybekova2");
+        System.out.println("Повтор нового пароля");
+
+        save.click();
+        System.out.println("Сохраняем");
+
+        save2.click();
+
+
 
     }
 }
