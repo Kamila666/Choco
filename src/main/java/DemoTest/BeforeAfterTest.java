@@ -26,22 +26,26 @@ public class BeforeAfterTest{
     @BeforeTest
     public void setup() throws MalformedURLException {
 
+        /**Настройка нужных возможностей  Android и пакет приложений в Appium*/
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability("deviceName", "Galaxy J7");
 
         capabilities.setCapability("platformName", "Android");
 
+        /**Это название пакета вашего приложения (вы можете получить его из приложения apk info app)*/
         capabilities.setCapability("appPackage", "kz.rahmet.app");
 
         capabilities.setCapability("appActivity", "kz.rahmet.app.mvp.root.ActivityMain");
 
+        /**Подключение к серверу Appium*/
         driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
 
         System.out.println("Successful");
 
     }
 
+    /**Ожидание при поиске элемента*/
     public void waitForOneSec(){
         try {
             Thread.sleep(1000);
@@ -73,12 +77,14 @@ public class BeforeAfterTest{
         }
     }
 
+    /**Поиск элемента по ID*/
     public AndroidElement newAndroidWebEl(String id, int timeout) {
         return (AndroidElement) new WebDriverWait(driver, timeout).until(
                 ExpectedConditions.elementToBeClickable(MobileBy.id(id))
         );
     }
 
+    /**Поиск элемента по тексту*/
     public AndroidElement newAndroidText(String text, int timeout) {
         return (AndroidElement) new  WebDriverWait(driver, timeout).until(
                 ExpectedConditions.visibilityOfElementLocated(MobileBy.linkText("+text+")));
@@ -90,6 +96,7 @@ public class BeforeAfterTest{
 
 
 
+    /**Поиск элемента по классу и тексту*/
     public AndroidElement newAndroidXpath(String className,  String TextView) {
         return (AndroidElement) new  WebDriverWait(driver, 10).until(
                 ExpectedConditions.visibilityOfElementLocated(MobileBy.xpath("//"+className+"[@text='"+TextView+"']"))
@@ -97,6 +104,7 @@ public class BeforeAfterTest{
     }
 
 
+    /**Поиск элемента по content desc*/
     public AndroidElement newAndroidContentDesc(String className,  String TextView) {
         return (AndroidElement) new  WebDriverWait(driver, 10).until(
                 ExpectedConditions.visibilityOfElementLocated(MobileBy.xpath("//"+className+"[@content-desc='"+TextView+"']"))
@@ -104,17 +112,17 @@ public class BeforeAfterTest{
     }
 
 
-    public AndroidElement newAndroidClassName(String className) {
-        return (AndroidElement) new  WebDriverWait(driver, 10).until(
-                ExpectedConditions.visibilityOfElementLocated(MobileBy.className(className))
-        );
-    }
 
+    /**
+     *Поиск элемента по классу и индексу
+     */
     public AndroidElement newAndroidIndex(String className, String TextView) {
         return (AndroidElement) new WebDriverWait(driver, 10).until(
                 ExpectedConditions.visibilityOfElementLocated(MobileBy.xpath("//"+className+"[@index='"+TextView+"']"))
         );
     }
+
+
 
     public void verticalSwipe()
     {
@@ -139,15 +147,9 @@ public class BeforeAfterTest{
         driver.swipe(startx, y, endx, y, 500);
     }
 
-    public void tapBtnAlreadyHave() {
-        try {
-            AndroidElement alreadyHave = newAndroidWebEl("kz.alfabank.mobile.android.debug:id/btnAlreadyhave", this.DefaultTimeout);
-            alreadyHave.click();
-        }catch (NoSuchElementException e){
-            FailTapMessage.failTapMessage("Уже подключен", e);
 
-        }
-    }
+
+/**кнопки нажатия 'Home','Back','Menu'*/
 
 //    driver.pressKeyCode(AndroidKeyCode.HOME);
 //    driver.pressKeyCode(AndroidKeyCode.BACK);
