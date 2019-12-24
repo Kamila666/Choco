@@ -78,7 +78,7 @@ public class BeforeAfterTest{
     }
 
     /**Поиск элемента по ID*/
-    public AndroidElement newAndroidWebEl(String id, int timeout) {
+    AndroidElement newAndroidWebEl(String id, int timeout) {
         return (AndroidElement) new WebDriverWait(driver, timeout).until(
                 ExpectedConditions.elementToBeClickable(MobileBy.id(id))
         );
@@ -97,7 +97,7 @@ public class BeforeAfterTest{
 
 
     /**Поиск элемента по классу и тексту*/
-    public AndroidElement newAndroidXpath(String className,  String TextView) {
+    AndroidElement newAndroidXpath(String className, String TextView) {
         return (AndroidElement) new  WebDriverWait(driver, 10).until(
                 ExpectedConditions.visibilityOfElementLocated(MobileBy.xpath("//"+className+"[@text='"+TextView+"']"))
         );
@@ -116,7 +116,7 @@ public class BeforeAfterTest{
     /**
      *Поиск элемента по классу и индексу
      */
-    public AndroidElement newAndroidIndex(String className, String TextView) {
+    AndroidElement newAndroidIndex(String className, String TextView) {
         return (AndroidElement) new WebDriverWait(driver, 10).until(
                 ExpectedConditions.visibilityOfElementLocated(MobileBy.xpath("//"+className+"[@index='"+TextView+"']"))
         );
@@ -124,7 +124,7 @@ public class BeforeAfterTest{
 
 
 
-    public void verticalSwipe()
+    void verticalSwipe()
     {
         Dimension dim = driver.manage().window().getSize();
         int height = dim.getHeight();

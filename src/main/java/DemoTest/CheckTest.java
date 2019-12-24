@@ -7,15 +7,39 @@ import org.testng.annotations.Test;
 public class CheckTest extends BeforeAfterTest{
     @Test
     public void history() {
-        AndroidElement close = newAndroidWebEl("kz.rahmet.app:id/tvClose", this.DefaultTimeout);
-        close.click();
+        MainMenu();
 
-        AndroidElement positive = newAndroidWebEl("kz.rahmet.app:id/btnPositive", this.DefaultTimeout);
-        positive.click();
+        LoginAccount();
 
-        AndroidElement allow = newAndroidWebEl("com.android.packageinstaller:id/permission_allow_button", this.DefaultTimeout);
-        allow.click();
+        OneTimePassword();
 
+        AndroidElement tvHint = newAndroidWebEl("kz.rahmet.app:id/tvName", this.DefaultTimeout);
+        boolean flag = (tvHint.getText()).equals("Burger Station");
+        Assert.assertTrue(flag, "Элементы страницы 'История' отображаются некорректно");
+
+
+
+
+    }
+
+    private void OneTimePassword() {
+        AndroidElement tv1 = newAndroidWebEl("kz.rahmet.app:id/tv1", this.DefaultTimeout);
+        AndroidElement tv2 = newAndroidWebEl("kz.rahmet.app:id/tv2", this.DefaultTimeout);
+
+        tv1.click();
+        tv2.click();
+        tv1.click();
+        tv2.click();
+        System.out.println("Код доступа к приложению");
+
+        tv1.click();
+        tv2.click();
+        tv1.click();
+        tv2.click();
+        System.out.println("Подтверждаем код");
+    }
+
+    private void LoginAccount() {
         AndroidElement history = newAndroidWebEl("kz.rahmet.app:id/ivIconHistory", this.DefaultTimeout);
         history.click();
         System.out.println("Заходим в аккаунт");
@@ -33,36 +57,16 @@ public class CheckTest extends BeforeAfterTest{
         AndroidElement btnContinue = newAndroidWebEl("kz.rahmet.app:id/btnContinue", this.DefaultTimeout);
         btnContinue.click();
         System.out.println("Заходим в аккаунт");
+    }
 
-        AndroidElement tv1 = newAndroidWebEl("kz.rahmet.app:id/tv1", this.DefaultTimeout);
-        AndroidElement tv2 = newAndroidWebEl("kz.rahmet.app:id/tv2", this.DefaultTimeout);
+    private void MainMenu() {
+        AndroidElement close = newAndroidWebEl("kz.rahmet.app:id/tvClose", this.DefaultTimeout);
+        close.click();
 
-        tv1.click();
-        tv2.click();
-        tv1.click();
-        tv2.click();
-        System.out.println("Код доступа к приложению");
+        AndroidElement positive = newAndroidWebEl("kz.rahmet.app:id/btnPositive", this.DefaultTimeout);
+        positive.click();
 
-        tv1.click();
-        tv2.click();
-        tv1.click();
-        tv2.click();
-        System.out.println("Подтверждаем код");
-
-        AndroidElement tvHint = newAndroidWebEl("kz.rahmet.app:id/tvHint", this.DefaultTimeout);
-        boolean flag = (tvHint.getText()).equals("Соверши свою первую покупку с помощью QR-кода!");
-        Assert.assertTrue(flag, "Элементы страницы 'История' отображаются некорректно");
-
-
-
-
-
-
-
-
-
-
-
-
+        AndroidElement allow = newAndroidWebEl("com.android.packageinstaller:id/permission_allow_button", this.DefaultTimeout);
+        allow.click();
     }
 }
