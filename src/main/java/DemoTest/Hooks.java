@@ -19,9 +19,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Timer;
 
-public class BeforeAfterTest{
+public class Hooks {
     public AndroidDriver driver;
-    public int DefaultTimeout = 5;
+    public static final int DEFAULT_ACTION_DELAY = 2;
+    public static final String ANDROID_ROOT_ID = "kz.rahmet.app";
+    public static final String ANDROID_LAUNCH_ACTIVITY_ID = "kz.rahmet.app.mvp.root.ActivityMain";
+    public static final String ANDROID_ROOT_CLASSNAME = "android.widget.";
 
     @BeforeTest
     public void setup() throws MalformedURLException {
@@ -33,10 +36,14 @@ public class BeforeAfterTest{
 
         capabilities.setCapability("platformName", "Android");
 
-        /**Это название пакета вашего приложения (вы можете получить его из приложения apk info app)*/
-        capabilities.setCapability("appPackage", "kz.rahmet.app");
+//        capabilities.setCapability("noReset", "true");
+//
+//        capabilities.setCapability("fullReset", "false");
 
-        capabilities.setCapability("appActivity", "kz.rahmet.app.mvp.root.ActivityMain");
+        /**Это название пакета вашего приложения (вы можете получить его из приложения apk info app)*/
+        capabilities.setCapability("appPackage", ANDROID_ROOT_ID);
+
+        capabilities.setCapability("appActivity", ANDROID_LAUNCH_ACTIVITY_ID);
 
         /**Подключение к серверу Appium*/
         driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
@@ -78,18 +85,22 @@ public class BeforeAfterTest{
     }
 
     /**Поиск элемента по ID*/
-    AndroidElement newAndroidWebEl(String id, int timeout) {
-        return (AndroidElement) new WebDriverWait(driver, timeout).until(
-                ExpectedConditions.elementToBeClickable(MobileBy.id(id))
+    AndroidElement newAndroidWebEl(String id) {
+        return (AndroidElement) new WebDriverWait(driver, WebDriverWait.DEFAULT_SLEEP_TIMEOUT).until(
+                ExpectedConditions.elementToBeClickable(MobileBy.id((ANDROID_ROOT_ID + ":id/" + id)))
         );
     }
 
-    /**Поиск элемента по тексту*/
-    public AndroidElement newAndroidText(String text, int timeout) {
-        return (AndroidElement) new  WebDriverWait(driver, timeout).until(
+    AndroidElement newAndroidWebElement(String id) {
+        return (AndroidElement) new  WebDriverWait(driver, WebDriverWait.DEFAULT_SLEEP_TIMEOUT).until(
                 ExpectedConditions.visibilityOfElementLocated(MobileBy.linkText("+text+")));
 
+    }
 
+    /**Поиск элемента по тексту*/
+    public AndroidElement newAndroidText(String text) {
+        return (AndroidElement) new  WebDriverWait(driver, WebDriverWait.DEFAULT_SLEEP_TIMEOUT).until(
+                ExpectedConditions.visibilityOfElementLocated(MobileBy.linkText("+text+")));
     }
 
 
@@ -97,9 +108,9 @@ public class BeforeAfterTest{
 
 
     /**Поиск элемента по классу и тексту*/
-    AndroidElement newAndroidXpath(String className, String TextView) {
+    AndroidElement newAndroidClassName(String className, String TextView) {
         return (AndroidElement) new  WebDriverWait(driver, 10).until(
-                ExpectedConditions.visibilityOfElementLocated(MobileBy.xpath("//"+className+"[@text='"+TextView+"']"))
+                ExpectedConditions.visibilityOfElementLocated(MobileBy.xpath("//"+ANDROID_ROOT_CLASSNAME + className + "[@text='"+TextView+"']"))
         );
     }
 
@@ -118,7 +129,7 @@ public class BeforeAfterTest{
      */
     AndroidElement newAndroidIndex(String className, String TextView) {
         return (AndroidElement) new WebDriverWait(driver, 10).until(
-                ExpectedConditions.visibilityOfElementLocated(MobileBy.xpath("//"+className+"[@index='"+TextView+"']"))
+                ExpectedConditions.visibilityOfElementLocated(MobileBy.xpath("//"+ANDROID_ROOT_CLASSNAME + className +"[@index='"+TextView+"']"))
         );
     }
 
@@ -132,6 +143,18 @@ public class BeforeAfterTest{
         int x = width/2;
         int starty = (int)(height*0.80);
         int endy = (int)(height*0.20);
+        driver.swipe(x, starty, x, endy, 500);
+
+    }
+
+    void swipeUp()
+    {
+        Dimension dim = driver.manage().window().getSize();
+        int height = dim.getHeight();
+        int width = dim.getWidth();
+        int x = width/2;
+        int starty = (int)(height*0.20);
+        int endy = (int)(height*0.80);
         driver.swipe(x, starty, x, endy, 500);
 
     }

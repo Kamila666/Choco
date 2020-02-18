@@ -4,67 +4,39 @@ import io.appium.java_client.android.AndroidElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ChangeProfile extends BeforeAfterTest {
+public class ChangeProfile extends Hooks {
 
     @Test
     public void profile() {
-        MainMenu();
 
-        LoginAccount();
+        AndroidElement close = newAndroidWebEl("tvClose");
+        close.click();
 
-        OneTimePassword();
+        AndroidElement positive = newAndroidWebEl("btnPositive");
+        positive.click();
 
-        EditProfile();
+        AndroidElement allow = newAndroidClassName("Button", "РАЗРЕШИТЬ");
+        allow.click();
 
-        Profile();
+        AndroidElement history = newAndroidWebEl("ivIconProfile");
+        history.click();
+        System.out.println("Заходим в аккаунт");
 
-        AndroidElement name = newAndroidWebEl("kz.rahmet.app:id/tvNameOrEmail", this.DefaultTimeout);
-        boolean flag = (name.getText()).equals("Kamila Tasybekova");
-        Assert.assertTrue(flag, "Элементы страницы 'История' отображаются некорректно");
+        AndroidElement phoneNumber = newAndroidWebEl("metPhoneNumber");
+        phoneNumber.click();
+        phoneNumber.click();
+        phoneNumber.sendKeys("77769726968");
+        System.out.println("Вводим номер");
 
+        AndroidElement password = newAndroidWebEl("metPassword");
+        password.sendKeys("KTasybekova2");
+        System.out.println("Вводим пароль");
 
+        AndroidElement Continue = newAndroidWebEl("btnContinue");
+        Continue.click();
 
-
-
-    }
-
-    private void Profile() {
-        AndroidElement firstName = newAndroidWebEl("kz.rahmet.app:id/metFirstName", this.DefaultTimeout);
-        firstName.click();
-        firstName.clear();
-        firstName.sendKeys("Kamila");
-
-        AndroidElement lastName = newAndroidIndex("android.widget.EditText", "1");
-        lastName.click();
-        lastName.clear();
-        lastName.sendKeys("Tasybekova");
-
-        AndroidElement gender = newAndroidWebEl("kz.rahmet.app:id/metGender", this.DefaultTimeout);
-        gender.click();
-
-        AndroidElement gender2 = newAndroidXpath("android.widget.TextView", "Женский");
-        gender2.click();
-        verticalSwipe();
-        verticalSwipe();
-
-
-        AndroidElement save = newAndroidWebEl("kz.rahmet.app:id/buttonSave", this.DefaultTimeout);
-        save.click();
-    }
-
-    private void EditProfile() {
-        AndroidElement profile = newAndroidWebEl("kz.rahmet.app:id/ivIconProfile", this.DefaultTimeout);
-        profile.click();
-        System.out.println("Заходим в профиль");
-
-        AndroidElement change = newAndroidWebEl("kz.rahmet.app:id/tvChange", this.DefaultTimeout);
-        change.click();
-        System.out.println("Редактируем профиль");
-    }
-
-    private void OneTimePassword() {
-        AndroidElement tv1 = newAndroidWebEl("kz.rahmet.app:id/tv1", this.DefaultTimeout);
-        AndroidElement tv2 = newAndroidWebEl("kz.rahmet.app:id/tv2", this.DefaultTimeout);
+        AndroidElement tv1 = newAndroidWebEl("tv1");
+        AndroidElement tv2 = newAndroidWebEl("tv2");
 
         tv1.click();
         tv2.click();
@@ -77,35 +49,44 @@ public class ChangeProfile extends BeforeAfterTest {
         tv1.click();
         tv2.click();
         System.out.println("Подтверждаем код");
+
+        AndroidElement profile = newAndroidWebEl("ivIconProfile");
+        profile.click();
+        System.out.println("Заходим в профиль");
+
+        AndroidElement change = newAndroidWebEl("tvChange");
+        change.click();
+        System.out.println("Редактируем профиль");
+
+        AndroidElement firstName = newAndroidWebEl("metFirstName");
+        firstName.click();
+        firstName.clear();
+        firstName.sendKeys("Kamila");
+
+        AndroidElement lastName = newAndroidWebEl("metLastName");
+        lastName.click();
+        lastName.clear();
+        lastName.sendKeys("Tasybekova");
+
+        AndroidElement gender = newAndroidWebEl("metGender");
+        gender.click();
+
+        AndroidElement gender2 = newAndroidClassName("TextView", "Женский");
+        gender2.click();
+        verticalSwipe();
+        verticalSwipe();
+
+
+        AndroidElement save = newAndroidWebEl("buttonSave");
+        save.click();
+
+
+        AndroidElement name = newAndroidWebEl("tvNameOrEmail");
+        boolean flag = (name.getText()).equals("Kamila Tasybekova");
+        Assert.assertTrue(flag, "Элементы страницы 'История' отображаются некорректно");
+
     }
 
-    private void LoginAccount() {
-        AndroidElement history = newAndroidWebEl("kz.rahmet.app:id/ivIconProfile", this.DefaultTimeout);
-        history.click();
-        System.out.println("Заходим в аккаунт");
 
-        AndroidElement phoneNumber = newAndroidWebEl("kz.rahmet.app:id/metPhoneNumber", this.DefaultTimeout);
-        phoneNumber.click();
-        phoneNumber.click();
-        phoneNumber.sendKeys("77769726968");
-        System.out.println("Вводим номер");
 
-        AndroidElement password = newAndroidWebEl("kz.rahmet.app:id/metPassword", this.DefaultTimeout);
-        password.sendKeys("KTasybekova2");
-        System.out.println("Вводим пароль");
-
-        AndroidElement Continue = newAndroidWebEl("kz.rahmet.app:id/btnContinue", this.DefaultTimeout);
-        Continue.click();
-    }
-
-    private void MainMenu() {
-        AndroidElement close = newAndroidWebEl("kz.rahmet.app:id/tvClose", this.DefaultTimeout);
-        close.click();
-
-        AndroidElement positive = newAndroidWebEl("kz.rahmet.app:id/btnPositive", this.DefaultTimeout);
-        positive.click();
-
-        AndroidElement allow = newAndroidWebEl("com.android.packageinstaller:id/permission_allow_button", this.DefaultTimeout);
-        allow.click();
-    }
 }

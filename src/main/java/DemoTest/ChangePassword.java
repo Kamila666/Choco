@@ -1,43 +1,39 @@
 package DemoTest;
 
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
-import io.appium.java_client.android.AndroidKeyCode;
-import io.appium.java_client.android.nativekey.AndroidKey;
-import io.appium.java_client.android.nativekey.KeyEvent;
 import org.testng.annotations.Test;
 
-public class ChangePassword extends BeforeAfterTest {
+public class ChangePassword extends Hooks {
     @Test
     public void password() {
-        AndroidElement close = newAndroidWebEl("kz.rahmet.app:id/tvClose", this.DefaultTimeout);
+        AndroidElement close = newAndroidWebEl("tvClose");
         close.click();
 
-        AndroidElement positive = newAndroidWebEl("kz.rahmet.app:id/btnPositive", this.DefaultTimeout);
+        AndroidElement positive = newAndroidWebEl("btnPositive");
         positive.click();
 
-        AndroidElement allow = newAndroidWebEl("com.android.packageinstaller:id/permission_allow_button", this.DefaultTimeout);
+        AndroidElement allow = newAndroidClassName("Button", "РАЗРЕШИТЬ");
         allow.click();
 
-        AndroidElement history = newAndroidWebEl("kz.rahmet.app:id/ivIconProfile", this.DefaultTimeout);
+        AndroidElement history = newAndroidWebEl("ivIconProfile");
         history.click();
         System.out.println("Заходим в аккаунт");
 
-        AndroidElement phoneNumber = newAndroidWebEl("kz.rahmet.app:id/metPhoneNumber", this.DefaultTimeout);
+        AndroidElement phoneNumber = newAndroidWebEl("metPhoneNumber");
         phoneNumber.click();
         phoneNumber.click();
         phoneNumber.sendKeys("77769726968");
         System.out.println("Вводим номер");
 
-        AndroidElement password = newAndroidWebEl("kz.rahmet.app:id/metPassword", this.DefaultTimeout);
+        AndroidElement password = newAndroidWebEl("metPassword");
         password.sendKeys("KTasybekova2");
         System.out.println("Вводим пароль");
 
-        AndroidElement Continue = newAndroidWebEl("kz.rahmet.app:id/btnContinue", this.DefaultTimeout);
+        AndroidElement Continue = newAndroidWebEl("btnContinue");
         Continue.click();
 
-        AndroidElement tv1 = newAndroidWebEl("kz.rahmet.app:id/tv1", this.DefaultTimeout);
-        AndroidElement tv2 = newAndroidWebEl("kz.rahmet.app:id/tv2", this.DefaultTimeout);
+        AndroidElement tv1 = newAndroidWebEl("tv1");
+        AndroidElement tv2 = newAndroidWebEl("tv2");
 
         tv1.click();
         tv2.click();
@@ -51,61 +47,61 @@ public class ChangePassword extends BeforeAfterTest {
         tv2.click();
         System.out.println("Подтверждаем код");
 
-        AndroidElement setting = newAndroidWebEl("kz.rahmet.app:id/ivBtnSettings", this.DefaultTimeout);
+        AndroidElement setting = newAndroidWebEl("ivBtnSettings");
         setting.click();
         System.out.println("заходим в настройки");
 
-        AndroidElement change = newAndroidXpath("android.widget.TextView", "Сменить пароль");
+        AndroidElement change = newAndroidClassName("TextView", "Сменить пароль");
         change.click();
 
-        AndroidElement current = newAndroidWebEl("kz.rahmet.app:id/metCurrentPassword", this.DefaultTimeout);
+        AndroidElement current = newAndroidWebEl("metCurrentPassword");
         current.click();
         current.sendKeys("KTasybekova2");
         System.out.println("Вводим текущий пароль");
 
-        AndroidElement newPassword = newAndroidWebEl("kz.rahmet.app:id/metNewPassword", this.DefaultTimeout);
+        AndroidElement newPassword = newAndroidWebEl("metNewPassword");
         newPassword.click();
         newPassword.sendKeys("KTasybekova1");
         System.out.println("Вводим новый пароль");
 
-        AndroidElement repeat = newAndroidWebEl("kz.rahmet.app:id/metRepeatPassword", this.DefaultTimeout);
+        AndroidElement repeat = newAndroidWebEl("metRepeatPassword");
         repeat.click();
         repeat.sendKeys("KTasybekova1");
         System.out.println("Повтор нового пароля");
 
-        AndroidElement save = newAndroidWebEl("kz.rahmet.app:id/btnSave", this.DefaultTimeout);
+        AndroidElement save = newAndroidWebEl("btnSave");
         save.click();
         System.out.println("Сохраняем");
 
-        AndroidElement save2 = newAndroidWebEl("kz.rahmet.app:id/md_buttonDefaultNegative", this.DefaultTimeout);
+        AndroidElement save2 = newAndroidWebEl("md_buttonDefaultNegative");
         save2.click();
 
-        AndroidElement logOut = newAndroidWebEl("kz.rahmet.app:id/tvLogOut", this.DefaultTimeout);
+        AndroidElement logOut = newAndroidWebEl("tvLogOut");
         logOut.click();
         System.out.println("Выходим с аккаунта");
 
-        AndroidElement profile = newAndroidWebEl("kz.rahmet.app:id/ivIconProfile", this.DefaultTimeout);
+        AndroidElement profile = newAndroidWebEl("ivIconProfile");
         profile.click();
 
-        AndroidElement phone = newAndroidWebEl("kz.rahmet.app:id/metPhoneNumber", this.DefaultTimeout);
+        AndroidElement phone = newAndroidWebEl("metPhoneNumber");
         phone.click();
         phone.sendKeys("77769726968");
         System.out.println("Вводим телефон");
 
-        AndroidElement password2 = newAndroidWebEl("kz.rahmet.app:id/metPassword", this.DefaultTimeout);
+        AndroidElement password2 = newAndroidWebEl("metPassword");
         password2.click();
         password2.sendKeys("KTasybekova2");
         System.out.println("Вводим старый телефон");
 
-        AndroidElement btnContinue = newAndroidWebEl("kz.rahmet.app:id/btnContinue", this.DefaultTimeout);
+        AndroidElement btnContinue = newAndroidWebEl("btnContinue");
         btnContinue.click();
 
-        AndroidElement password3 = newAndroidWebEl("kz.rahmet.app:id/metPassword", this.DefaultTimeout);
+        AndroidElement password3 = newAndroidWebEl("metPassword");
         password3.click();
         password3.sendKeys("KTasybekova1");
         System.out.println("Вводим новый пароль");
 
-        AndroidElement btnContinue2 = newAndroidWebEl("kz.rahmet.app:id/btnContinue", this.DefaultTimeout);
+        AndroidElement btnContinue2 = newAndroidWebEl("btnContinue");
         btnContinue2.click();
 
         tv1.click();
@@ -120,10 +116,10 @@ public class ChangePassword extends BeforeAfterTest {
         tv2.click();
         System.out.println("Подтверждаем код");
 
-        AndroidElement profile2 = newAndroidWebEl("kz.rahmet.app:id/ivIconProfile", this.DefaultTimeout);
+        AndroidElement profile2 = newAndroidWebEl("ivIconProfile");
         profile2.click();
 
-        AndroidElement settings = newAndroidWebEl("kz.rahmet.app:id/ivBtnSettings", this.DefaultTimeout);
+        AndroidElement settings = newAndroidWebEl("ivBtnSettings");
         settings.click();
 
         change.click();

@@ -4,27 +4,39 @@ import io.appium.java_client.android.AndroidElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CheckTest extends BeforeAfterTest{
+public class CheckTest extends Hooks {
     @Test
     public void history() {
-        MainMenu();
 
-        LoginAccount();
+        AndroidElement close = newAndroidWebEl("tvClose");
+        close.click();
 
-        OneTimePassword();
+        AndroidElement positive = newAndroidWebEl("btnPositive");
+        positive.click();
 
-        AndroidElement tvHint = newAndroidWebEl("kz.rahmet.app:id/tvName", this.DefaultTimeout);
-        boolean flag = (tvHint.getText()).equals("Burger Station");
-        Assert.assertTrue(flag, "Элементы страницы 'История' отображаются некорректно");
+        AndroidElement allow = newAndroidClassName("Button", "РАЗРЕШИТЬ");
+        allow.click();
 
+        AndroidElement history = newAndroidWebEl("ivIconHistory");
+        history.click();
+        System.out.println("Заходим в аккаунт");
 
+        AndroidElement phoneNumber = newAndroidWebEl("metPhoneNumber");
+//        phoneNumber.click();
+        phoneNumber.sendKeys("77769726968");
+        System.out.println("Вводим номер");
 
+        AndroidElement password = newAndroidWebEl("metPassword");
+        password.click();
+        password.sendKeys("KTasybekova2");
+        System.out.println("Вводим пароль");
 
-    }
+        AndroidElement btnContinue = newAndroidWebEl("btnContinue");
+        btnContinue.click();
+        System.out.println("Заходим в аккаунт");
 
-    private void OneTimePassword() {
-        AndroidElement tv1 = newAndroidWebEl("kz.rahmet.app:id/tv1", this.DefaultTimeout);
-        AndroidElement tv2 = newAndroidWebEl("kz.rahmet.app:id/tv2", this.DefaultTimeout);
+        AndroidElement tv1 = newAndroidWebEl("tv1");
+        AndroidElement tv2 = newAndroidWebEl("tv2");
 
         tv1.click();
         tv2.click();
@@ -37,36 +49,21 @@ public class CheckTest extends BeforeAfterTest{
         tv1.click();
         tv2.click();
         System.out.println("Подтверждаем код");
+
+
+
+        AndroidElement tvHint = newAndroidWebEl("tvName");
+        boolean flag = (tvHint.getText()).equals("Burger Station");
+        Assert.assertTrue(flag, "Элементы страницы 'История' отображаются некорректно");
+
+
+
+
     }
 
-    private void LoginAccount() {
-        AndroidElement history = newAndroidWebEl("kz.rahmet.app:id/ivIconHistory", this.DefaultTimeout);
-        history.click();
-        System.out.println("Заходим в аккаунт");
 
-        AndroidElement phoneNumber = newAndroidWebEl("kz.rahmet.app:id/metPhoneNumber", this.DefaultTimeout);
-//        phoneNumber.click();
-        phoneNumber.sendKeys("77769726968");
-        System.out.println("Вводим номер");
 
-        AndroidElement password = newAndroidWebEl("kz.rahmet.app:id/metPassword", this.DefaultTimeout);
-        password.click();
-        password.sendKeys("KTasybekova2");
-        System.out.println("Вводим пароль");
 
-        AndroidElement btnContinue = newAndroidWebEl("kz.rahmet.app:id/btnContinue", this.DefaultTimeout);
-        btnContinue.click();
-        System.out.println("Заходим в аккаунт");
-    }
 
-    private void MainMenu() {
-        AndroidElement close = newAndroidWebEl("kz.rahmet.app:id/tvClose", this.DefaultTimeout);
-        close.click();
 
-        AndroidElement positive = newAndroidWebEl("kz.rahmet.app:id/btnPositive", this.DefaultTimeout);
-        positive.click();
-
-        AndroidElement allow = newAndroidWebEl("com.android.packageinstaller:id/permission_allow_button", this.DefaultTimeout);
-        allow.click();
-    }
 }
