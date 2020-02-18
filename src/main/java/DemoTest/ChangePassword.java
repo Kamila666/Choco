@@ -42,7 +42,7 @@ public class ChangePassword extends Hooks {
         System.out.println("Код доступа к приложению");
 
         tv1.click();
-        tv2.click();
+        tv2.click(); 
         tv1.click();
         tv2.click();
         System.out.println("Подтверждаем код");
